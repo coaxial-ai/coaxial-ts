@@ -1,0 +1,37 @@
+{
+  "name": "coaxial-ts",
+  "version": "0.0.1",
+  "description": "coaxial-ts: a typescript client for interacting with the Coaxial API",
+  "author": "Team Coaxial",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coaxial-ai/coaxial-ts.git"
+  },
+  "keywords": [
+    "axios",
+    "typescript",
+    "coaxial-client",
+    "coaxial-ts"
+  ],
+  "license": "ISC",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "module": "./dist/esm/index.js",
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc && tsc -p tsconfig.esm.json",
+    "prepare": "npm run build",
+    "login": "npm login",
+    "publish": "npm publish"
+  },
+  "dependencies": {
+    "axios": "^0.27.2"
+  },
+  "devDependencies": {
+    "@types/node": "^12.11.5",
+    "typescript": "^4.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
