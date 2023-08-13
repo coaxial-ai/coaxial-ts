@@ -7,6 +7,7 @@
     "type": "git",
     "url": "https://github.com/coaxial-ai/coaxial-ts.git"
   },
+  "homepage": "https://coaxial.ai",
   "keywords": [
     "axios",
     "typescript",
@@ -20,9 +21,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "tsc && tsc -p tsconfig.esm.json",
-    "prepare": "npm run build",
-    "login": "npm login",
-    "publish": "npm publish"
+    "prepare": "npm run build"
   },
   "dependencies": {
     "axios": "^0.27.2"
