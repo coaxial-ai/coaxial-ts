@@ -1,4 +1,6 @@
 export * from './auth-integration';
+export * from './call-model-request';
+export * from './call-model-response';
 export * from './check-access-by-resource-id-request';
 export * from './check-access-for-all-request';
 export * from './dataset';
@@ -32,6 +34,8 @@ export * from './remove-function-request';
 export * from './remove-function-response';
 export * from './remove-model-request';
 export * from './remove-model-response';
+export * from './remove-user-request';
+export * from './remove-user-response';
 export * from './revoke-access-request';
 export * from './revoke-access-response';
 export * from './tag';

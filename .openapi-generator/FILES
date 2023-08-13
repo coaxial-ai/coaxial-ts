@@ -1,6 +1,5 @@
 .gitignore
 .npmignore
-.openapi-generator-ignore
 Makefile
 README.md
 api.ts
@@ -15,6 +14,8 @@ configuration.ts
 git_push.sh
 index.ts
 models/auth-integration.ts
+models/call-model-request.ts
+models/call-model-response.ts
 models/check-access-by-resource-id-request.ts
 models/check-access-for-all-request.ts
 models/dataset-info.ts
@@ -49,6 +50,8 @@ models/remove-function-request.ts
 models/remove-function-response.ts
 models/remove-model-request.ts
 models/remove-model-response.ts
+models/remove-user-request.ts
+models/remove-user-response.ts
 models/revoke-access-request.ts
 models/revoke-access-response.ts
 models/tag.ts

@@ -22,6 +22,10 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
+import { CallModelRequest } from '../models';
+// @ts-ignore
+import { CallModelResponse } from '../models';
+// @ts-ignore
 import { HTTPValidationError } from '../models';
 // @ts-ignore
 import { IntegrateCustomModelRequest } from '../models';
@@ -43,6 +47,46 @@ import { RemoveModelResponse } from '../models';
  */
 export const ModelIntegrationApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * 
+         * @summary Add an identity header to LLM prompt
+         * @param {CallModelRequest} callModelRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        callModel: async (callModelRequest: CallModelRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'callModelRequest' is not null or undefined
+            assertParamExists('callModel', 'callModelRequest', callModelRequest)
+            const localVarPath = `/llm_integration/include_identity/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Authorization required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(callModelRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 
          * @summary Integrate custom models
@@ -214,6 +258,17 @@ export const ModelIntegrationApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary Add an identity header to LLM prompt
+         * @param {CallModelRequest} callModelRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async callModel(callModelRequest: CallModelRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CallModelResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.callModel(callModelRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary Integrate custom models
          * @param {IntegrateCustomModelRequest} integrateCustomModelRequest 
          * @param {*} [options] Override http request option.
@@ -268,6 +323,16 @@ export const ModelIntegrationApiFactory = function (configuration?: Configuratio
     return {
         /**
          * 
+         * @summary Add an identity header to LLM prompt
+         * @param {CallModelRequest} callModelRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        callModel(callModelRequest: CallModelRequest, options?: any): AxiosPromise<CallModelResponse> {
+            return localVarFp.callModel(callModelRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Integrate custom models
          * @param {IntegrateCustomModelRequest} integrateCustomModelRequest 
          * @param {*} [options] Override http request option.
@@ -316,6 +381,18 @@ export const ModelIntegrationApiFactory = function (configuration?: Configuratio
  * @extends {BaseAPI}
  */
 export class ModelIntegrationApi extends BaseAPI {
+    /**
+     * 
+     * @summary Add an identity header to LLM prompt
+     * @param {CallModelRequest} callModelRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ModelIntegrationApi
+     */
+    public callModel(callModelRequest: CallModelRequest, options?: AxiosRequestConfig) {
+        return ModelIntegrationApiFp(this.configuration).callModel(callModelRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @summary Integrate custom models
