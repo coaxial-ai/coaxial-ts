@@ -1,6 +1,6 @@
 {
   "name": "coaxial-ts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "coaxial-ts: a typescript client for interacting with the Coaxial API",
   "author": "Team Coaxial",
   "repository": {
