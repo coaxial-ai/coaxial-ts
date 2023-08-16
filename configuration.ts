@@ -18,6 +18,7 @@ export interface ConfigurationParameters {
     username?: string;
     password?: string;
     accessToken?: string | Promise<string> | ((name?: string, scopes?: string[]) => string) | ((name?: string, scopes?: string[]) => Promise<string>);
+    basePath?: string;
     env?: string;
     baseOptions?: any;
     formDataCtor?: new () => any;
@@ -89,8 +90,8 @@ export class Configuration {
         this.apiKey = param.apiKey;
         this.username = param.username;
         this.password = param.password;
-        this.accessToken = param.accessToken;
-        this.basePath = param.env;
+        this.accessToken = param.apiKey;
+        this.basePath = param.basePath ?? param.env;
         this.baseOptions = param.baseOptions;
         this.formDataCtor = param.formDataCtor;
     }
